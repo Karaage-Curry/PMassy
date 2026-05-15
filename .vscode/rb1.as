@@ -1,82 +1,82 @@
 .PROGRAM main1()
 ; ============================
-; ãƒ­ãƒœãƒƒãƒˆâ‘  ãƒ¡ã‚¤ãƒ³ãƒ—ãƒ­ã‚°ãƒ©ãƒ 
-;githubç®¡ç†
+; ƒƒ{ƒbƒg‡@ ƒƒCƒ“ƒvƒƒOƒ‰ƒ€
+;githubŠÇ—test
 ; ============================
 
-; ---- èµ·å‹•å‡¦ç† ----
-WAIT PLC_START = ON         ; PLCèµ·å‹•ä¿¡å·å¾…ã¡
-JMOVE HOME                   ; åŽŸç‚¹ç¢ºèª
+; ---- ‹N“®ˆ— ----
+WAIT PLC_START = ON         ; PLC‹N“®M†‘Ò‚¿
+JMOVE HOME                   ; Œ´“_Šm”F
 
-; ---- è¨ˆæ¸¬ãƒˆãƒªã‚¬ãƒ¼ ----
-SIGNAL VISION_START         ; ãƒ“ã‚¸ãƒ§ãƒ³è¨ˆæ¸¬é–‹å§‹
-SIGNAL ROB2_MEASURE_REQ     ; ãƒ­ãƒœâ‘¡ã¸è¨ˆæ¸¬æŒ‡ä»¤
+; ---- Œv‘ªƒgƒŠƒK[ ----
+SIGNAL VISION_START         ; ƒrƒWƒ‡ƒ“Œv‘ªŠJŽn
+SIGNAL ROB2_MEASURE_REQ     ; ƒƒ{‡A‚ÖŒv‘ªŽw—ß
 
-; ---- ATCå‰ãƒã‚¸ã‚·ãƒ§ãƒ³ç§»å‹• ----
-JMOVE ATC_PRE_POS            ; ãƒãƒ³ãƒ‰è£…ç€ç›´å‰ä½ç½®ã¸ç§»å‹•
+; ---- ATC‘Oƒ|ƒWƒVƒ‡ƒ“ˆÚ“® ----
+JMOVE ATC_PRE_POS            ; ƒnƒ“ƒh‘•’…’¼‘OˆÊ’u‚ÖˆÚ“®
 
-; ---- ãƒ“ã‚¸ãƒ§ãƒ³çµæžœå¾…ã¡ ----
-WAIT VISION_DONE = ON       ; ãƒ“ã‚¸ãƒ§ãƒ³å®Œäº†å¾…ã¡
+; ---- ƒrƒWƒ‡ƒ“Œ‹‰Ê‘Ò‚¿ ----
+WAIT VISION_DONE = ON       ; ƒrƒWƒ‡ƒ“Š®—¹‘Ò‚¿
 
-; ---- ãƒ“ã‚¸ãƒ§ãƒ³çµæžœå–å¾— ----
+; ---- ƒrƒWƒ‡ƒ“Œ‹‰ÊŽæ“¾ ----
 
-; ---- ãƒ“ã‚¸ãƒ§ãƒ³åˆ¤å®š ----
-IF VISION_OK == OFF THEN    ; ãƒ“ã‚¸ãƒ§ãƒ³è¨ˆæ¸¬ç•°å¸¸
-    SIGNAL PLC_ERROR        ; PLCã¸ç•°å¸¸é€šçŸ¥
-    JMOVE HOME               ; åŽŸç‚¹å¾©å¸°
-    STOP                    ; ã‚¨ãƒ©ãƒ¼å‡¦ç†
+; ---- ƒrƒWƒ‡ƒ“”»’è ----
+IF VISION_OK == OFF THEN    ; ƒrƒWƒ‡ƒ“Œv‘ªˆÙí
+    SIGNAL PLC_ERROR        ; PLC‚ÖˆÙí’Ê’m
+    JMOVE HOME               ; Œ´“_•œ‹A
+    STOP                    ; ƒGƒ‰[ˆ—
 ENDIF
 
-; ---- ãƒãƒ³ãƒ‰è£…ç€ ----
+; ---- ƒnƒ“ƒh‘•’… ----
 JMOVE ATC_ATTACH_POS
-TOOL_ATTACH                 ; ãƒãƒ³ãƒ‰è£…ç€
+TOOL_ATTACH                 ; ƒnƒ“ƒh‘•’…
 
-; ---- ãƒ¯ãƒ¼ã‚¯â‘ å‡¦ç† ----
-JMOVE WORK1_PICK_POS    ;æŠŠæŒä½ç½®ã¸ç§»å‹•
-GRIP                        ; ãƒ¯ãƒ¼ã‚¯â‘ æŠŠæŒ
+; ---- ƒ[ƒN‡@ˆ— ----
+JMOVE WORK1_PICK_POS    ;”cŽˆÊ’u‚ÖˆÚ“®
+GRIP                        ; ƒ[ƒN‡@”cŽ
 
-JMOVE WORK1_PLACE_POS   ;é…ç½®ä½ç½®ã¸ç§»å‹•
-RELEASE                     ; ãƒ¯ãƒ¼ã‚¯â‘ é…ç½®
+JMOVE WORK1_PLACE_POS   ;”z’uˆÊ’u‚ÖˆÚ“®
+RELEASE                     ; ƒ[ƒN‡@”z’u
 
-; ---- è£œæ­£å€¤å—ä¿¡ ----
-SIGNAL OFFSET_REQ           ; PLCã¸è£œæ­£å€¤è¦æ±‚
-WAIT OFFSET_READY = ON      ; è£œæ­£å€¤å—ä¿¡å¾…ã¡
+; ---- •â³’lŽóM ----
+SIGNAL OFFSET_REQ           ; PLC‚Ö•â³’l—v‹
+WAIT OFFSET_READY = ON      ; •â³’lŽóM‘Ò‚¿
 
-; ---- è£œæ­£å€¤åˆ¤å®š ----
+; ---- •â³’l”»’è ----
 IF OFFSET_OK == OFF THEN
-    SIGNAL PLC_ERROR        ; PLCã¸ç•°å¸¸é€šçŸ¥
-    ; ï¼ˆã‚¨ãƒ©ãƒ¼å‡¦ç†ï¼šTOPã®ã¿çµ„ç«‹ãªã©ï¼‰
+    SIGNAL PLC_ERROR        ; PLC‚ÖˆÙí’Ê’m
+    ; iƒGƒ‰[ˆ—FTOP‚Ì‚Ý‘g—§‚È‚Çj
     STOP
 ENDIF
 
-; ---- ãƒ¯ãƒ¼ã‚¯â‘¡å‡¦ç† ----
+; ---- ƒ[ƒN‡Aˆ— ----
 JMOVE WORK2_PICK_POS
 GRIP
 
-; è£œæ­£é©ç”¨ç§»å‹•
-JMOVE WORK2_PLACE_POS + OFFSET(X,Y,Î¸)
+; •â³“K—pˆÚ“®
+JMOVE WORK2_PLACE_POS + OFFSET(X,Y,ƒÆ)
 RELEASE
 
-; ---- é…ç½®åˆ¤å®š ----
+; ---- ”z’u”»’è ----
 IF PLACE_OK == OFF THEN
     SIGNAL PLC_ERROR
     STOP
 ENDIF
 
-; ---- å®Œäº†é€šçŸ¥ ----
-SIGNAL PLC_COMPLETE         ; PLCã¸è¨­ç½®å®Œäº†
+; ---- Š®—¹’Ê’m ----
+SIGNAL PLC_COMPLETE         ; PLC‚ÖÝ’uŠ®—¹
 
-; ---- åŽŸç‚¹å¾©å¸° ----
+; ---- Œ´“_•œ‹A ----
 JMOVE HOME
 
-; ---- ã‚µã‚¤ã‚¯ãƒ«ç¶™ç¶šåˆ¤å®š ----
-WAIT PLC_NEXT_CMD           ; PLCåˆ¤æ–­å¾…ã¡
+; ---- ƒTƒCƒNƒ‹Œp‘±”»’è ----
+WAIT PLC_NEXT_CMD           ; PLC”»’f‘Ò‚¿
 
 IF PLC_CONTINUE == ON THEN
-    ; ãƒãƒ³ãƒ‰ä¿æŒ
-    JMP START               ; æ¬¡ã‚µã‚¤ã‚¯ãƒ«
+    ; ƒnƒ“ƒh•ÛŽ
+    JMP START               ; ŽŸƒTƒCƒNƒ‹
 ELSE
-    ; ãƒãƒ³ãƒ‰è¿”å´
+    ; ƒnƒ“ƒh•Ô‹p
     JMOVE ATC_DETACH_POS
     TOOL_DETACH
     JMOVE HOME
